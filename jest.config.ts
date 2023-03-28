@@ -6,6 +6,7 @@ const jestConfig: JestConfigWithTsJest = {
   verbose: true,
   collectCoverage: true,
   testEnvironment: 'node',
+  testPathIgnorePatterns: ['dist'],
   transform: {
     ...tsjPreset.transform,
   },

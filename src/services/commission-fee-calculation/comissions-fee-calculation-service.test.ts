@@ -4,10 +4,10 @@ import {
   ICashOutJuridicalFee,
   ICashOutNaturalFee,
 } from 'types/types';
-import { calculateCashIn } from 'services/commission-fee-calculation/calculate-cash-in';
-import { calculateCashOutNatural } from 'services/commission-fee-calculation/calculate-cash-out-natural';
-import { calculateCashOutJuridical } from 'services/commission-fee-calculation/calculate-cash-out-juridical';
-import { calculateFee } from 'services/commission-fee-calculation/commission-fee-calculation-service';
+import { calculateCashIn } from './calculate-cash-in';
+import { calculateCashOutNatural } from './calculate-cash-out-natural';
+import { calculateCashOutJuridical } from './calculate-cash-out-juridical';
+import { calculateFee } from './commission-fee-calculation-service';
 
 export const testCashInFee: ICashInFee = {
   percents: 0.03,

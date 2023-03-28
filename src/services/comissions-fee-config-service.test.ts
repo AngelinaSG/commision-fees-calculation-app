@@ -2,11 +2,11 @@ import {
   testCashInFee,
   testCashOutJuridicalFee,
   testCashOutNaturalFee,
-} from 'services/commission-fee-calculation/comissions-fee-calculation-service.test';
-import { axios } from 'config/axios';
-import { CommissionsFeeService } from 'services/commissions-fee-config-service';
+} from './commission-fee-calculation/comissions-fee-calculation-service.test';
+import { axios } from '../config/axios';
+import { CommissionsFeeService } from './commissions-fee-config-service';
 
-jest.mock('../../config/axios');
+jest.mock('../config/axios');
 
 const mockedAxios = axios as jest.MockedFunction<typeof axios>;
 

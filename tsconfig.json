@@ -9,10 +9,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "baseUrl": "src",
     "noImplicitAny": false,
     "types": ["node", "jest"]
   },
-  "include": ["src"],
+  "include": ["src", "src/**/*.json"],
   "exclude": ["node_modules"]
 }
