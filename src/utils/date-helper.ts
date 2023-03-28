@@ -2,10 +2,14 @@ import dayjs from 'dayjs';
 import en from 'dayjs/locale/en';
 
 interface DateHelperInterface {
-  isSame: (payload: { firstDate: string, secondDate: string, unit: string }) => boolean;
+  isSame: (payload: {
+    firstDate: string;
+    secondDate: string;
+    unit: string;
+  }) => boolean;
 }
 
-class _DateHelper implements DateHelperInterface{
+class _DateHelper implements DateHelperInterface {
   private readonly datePlugin;
 
   constructor(datePlugin, locale) {

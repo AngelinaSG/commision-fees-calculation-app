@@ -1,6 +1,6 @@
 import { axios } from '../config/axios';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { ResponseError } from '../services/error-entity';
+import { ResponseError } from '../config/error-entity';
 
 export class BaseHttpServices {
   getErrorMessage(message: string): string | undefined {

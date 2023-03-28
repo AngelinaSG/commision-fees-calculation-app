@@ -1,28 +1,37 @@
 import { parseFile } from '../utils/parse-file';
-import { calculateFee } from '../services/comissions-fee-calculation-service';
-import { getCommissionFee } from '../models/commission-fee';
-import {ICashOperation} from "types/types";
+import { calculateFee } from '../services/commission-fee-calculation/commission-fee-calculation-service';
+import { ICashOperation } from 'types/types';
+import { getCommissionFee } from '../services/commission-fee-calculation/get-commission-fees';
+import { OutputHelper } from '../utils/output-helper';
 
-export const processCalculation = async (pathToFile) => {
-  console.log('Start fee calculation...\n');
+export const processCalculation = async (pathToFile: string) => {
+  OutputHelper.gradient('teen', 'Start fee calculation...\n');
 
-  const operationsList = await parseFile<ICashOperation[]>(pathToFile);
+  try {
+    const operationsList = await parseFile<ICashOperation[]>(pathToFile);
 
-  const { cashInFee, cashOutJuridicalFee, cashOutNaturalFee } =
-    await getCommissionFee();
+    const { cashInFee, cashOutJuridicalFee, cashOutNaturalFee } =
+      await getCommissionFee();
 
-  const feeList = calculateFee({
-    operationsList,
-    cashInFee,
-    cashOutJuridicalFee,
-    cashOutNaturalFee,
-  });
+    const feeList = calculateFee({
+      operationsList,
+      cashInFee,
+      cashOutJuridicalFee,
+      cashOutNaturalFee,
+    });
 
-  outputData(feeList);
+    outputData(feeList);
 
-  console.log('Fee calculation have finished successfully:)\n');
+    OutputHelper.gradient(
+      'teen',
+      'Fee calculation have finished successfully:)',
+    );
+
+  } catch (e) {
+    return OutputHelper.gradient('passion', (e as Error).message);
+  }
 };
 
 const outputData = (data: string[]) => {
-  data.forEach((res) => console.log(`${res}\n`));
+  data.forEach((res) => OutputHelper.simple(`${res}\n`));
 };

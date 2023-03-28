@@ -1,10 +1,14 @@
 import { BaseHttpServices } from '../config/base-http-services';
-import {ICashInFee, ICashOutJuridicalFee, ICashOutNaturalFee} from "../types/types";
+import {
+  ICashInFee,
+  ICashOutJuridicalFee,
+  ICashOutNaturalFee,
+} from '../types/types';
 
 interface CommissionsFeeServiceInterface {
   getCashInFee: () => Promise<ICashInFee>;
   getCashOutNaturalFee: () => Promise<ICashOutNaturalFee>;
-  getCashOutJuridicalFee: () => Promise<ICashOutJuridicalFee>
+  getCashOutJuridicalFee: () => Promise<ICashOutJuridicalFee>;
 }
 
 class _CommissionsFeeService implements CommissionsFeeServiceInterface {
@@ -14,18 +18,18 @@ class _CommissionsFeeService implements CommissionsFeeServiceInterface {
     this.https = httpService;
   }
 
-  getCashInFee = async () => {
-    const res = await this.https.get('/cash-in');
+  getCashInFee = async (): Promise<ICashInFee> => {
+    const res = await this.https.get('tasks/api/cash-in');
     return res.data;
   };
 
-  getCashOutNaturalFee = async () => {
-    const res = await this.https.get('/cash-out-natural');
+  getCashOutNaturalFee = async (): Promise<ICashOutNaturalFee> => {
+    const res = await this.https.get('tasks/api/cash-out-natural');
     return res.data;
   };
 
-  getCashOutJuridicalFee = async () => {
-    const res = await this.https.get('/cash-out-juridical');
+  getCashOutJuridicalFee = async (): Promise<ICashOutJuridicalFee> => {
+    const res = await this.https.get('tasks/api/cash-out-juridical');
     return res.data;
   };
 }
