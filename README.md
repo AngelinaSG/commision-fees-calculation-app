@@ -27,9 +27,10 @@ npm test
 
 ## Installation
 
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
+Open project in you code editor and run
 
 ```sh
+npm install
 npm build
 cd dist
 node index.js input.json
