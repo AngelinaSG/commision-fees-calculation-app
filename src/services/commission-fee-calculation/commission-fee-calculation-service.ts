@@ -7,9 +7,9 @@ import {
   ICashOutJuridicalFee,
   ICashOutNaturalFee,
 } from 'types/types';
-import { calculateCashIn } from '../commission-fee-calculation/calculate-cash-in';
-import { calculateCashOutJuridical } from '../commission-fee-calculation/calculate-cash-out-juridical';
-import { calculateCashOutNatural } from '../commission-fee-calculation/calculate-cash-out-natural';
+import { calculateCashIn } from './calculate-cash-in/calculate-cash-in';
+import { calculateCashOutJuridical } from './calculate-cash-out-juridical/calculate-cash-out-juridical';
+import { calculateCashOutNatural } from './calculate-cash-out-natural/calculate-cash-out-natural';
 
 interface calculateFeeArgsTypes {
   operationsList: ICashOperation[];
@@ -37,7 +37,9 @@ export const calculateFee = ({
 
     let operationFee;
 
-    if (cashOutNaturalHistory[user_id]) {
+    const isUserHasTransactionHistory = !!cashOutNaturalHistory[user_id];
+
+    if (isUserHasTransactionHistory) {
       const prevOperationDate = cashOutNaturalHistory[user_id].at(-1).date;
       const isSameWeek = DateHelper.isSame({
         firstDate: prevOperationDate,
@@ -63,11 +65,10 @@ export const calculateFee = ({
         cashOutNaturalHistory,
         cashOutNaturalFee,
       });
-      if (user_type === USER_TYPE.NATURAL) {
-        cashOutNaturalHistory[user_id] = cashOutNaturalHistory[user_id]
-          ? [...cashOutNaturalHistory[user_id], operation]
-          : [operation];
-      }
+
+      cashOutNaturalHistory[user_id] = cashOutNaturalHistory[user_id]
+        ? [...cashOutNaturalHistory[user_id], operation]
+        : [operation];
     }
 
     const { roundUp, formatToFixed } = NumberHelper;

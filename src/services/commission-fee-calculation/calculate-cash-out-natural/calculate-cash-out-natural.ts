@@ -1,4 +1,5 @@
 import { ICashOperation, ICashOutNaturalFee } from 'types/types';
+import { NumberHelper } from '../../../utils/number-helper';
 
 interface calculateCashOutNaturalArgs {
   operationData: ICashOperation;
@@ -20,17 +21,18 @@ export const calculateCashOutNatural = ({
     week_limit: { amount: weekLimitAmount },
   } = cashOutNaturalFee;
 
+  const { calculatePercentage } = NumberHelper;
   const isUserHaveOperations = !!cashOutNaturalHistory[user_id];
 
   if (!isUserHaveOperations) {
     return operationAmount > weekLimitAmount
-      ? ((operationAmount - weekLimitAmount) * percents) / 100
+      ? calculatePercentage(operationAmount - weekLimitAmount, percents)
       : 0;
   }
 
   const freeFeeLimitUsageAmount = cashOutNaturalHistory[user_id].reduce(
     (prev, cur) => {
-      return prev + Number(cur.operation.amount);
+      return prev + cur.operation.amount;
     },
     0,
   );
@@ -44,6 +46,7 @@ export const calculateCashOutNatural = ({
       freeFeeLimitUsageAmount < weekLimitAmount
         ? freeFeeLimitUsageAmount + operationAmount - weekLimitAmount
         : operationAmount;
-    return (taxableAmount * percents) / 100;
+
+    return calculatePercentage(taxableAmount, percents);
   }
 };

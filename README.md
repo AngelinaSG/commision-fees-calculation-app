@@ -1,6 +1,6 @@
 # Commission Fees Calculation App
-> Allows you to calculate the commission in the bank based on the given commission fees
 
+> Allows you to calculate the commission in the bank based on the given commission fees
 
 ## Development setup
 
@@ -24,7 +24,6 @@ To run tests execute
 npm test
 ```
 
-
 ## Installation
 
 Open project in you code editor and run
@@ -35,4 +34,3 @@ npm build
 cd dist
 node index.js input.json
 ```
-

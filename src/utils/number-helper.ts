@@ -2,6 +2,8 @@ interface NumberHelperInterface {
   roundUp: (number: number) => number;
 
   formatToFixed: (number: number, digits: number) => string;
+
+  calculatePercentage: (number: number, percent: number) => number;
 }
 
 class _NumberHelper implements NumberHelperInterface {
@@ -11,6 +13,10 @@ class _NumberHelper implements NumberHelperInterface {
 
   formatToFixed = (number, digits) => {
     return number.toFixed(digits);
+  };
+
+  calculatePercentage = (number, percentage) => {
+    return (number * percentage) / 100;
   };
 }
 

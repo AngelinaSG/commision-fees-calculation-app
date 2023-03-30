@@ -1,4 +1,4 @@
-import { parseFile } from '../utils/parse-file';
+import { parseFile } from '../utils/parse-file/parse-file';
 import { calculateFee } from '../services/commission-fee-calculation/commission-fee-calculation-service';
 import { ICashOperation } from 'types/types';
 import { getCommissionFee } from '../services/commission-fee-calculation/get-commission-fees';
@@ -26,7 +26,6 @@ export const processCalculation = async (pathToFile: string) => {
       'teen',
       'Fee calculation have finished successfully:)',
     );
-
   } catch (e) {
     return OutputHelper.gradient('passion', (e as Error).message);
   }
