@@ -2,7 +2,7 @@ import {
   testCashInFee,
   testCashOutJuridicalFee,
   testCashOutNaturalFee,
-} from './commission-fee-calculation/comissions-fee-calculation-service.test';
+} from '../dummy-data/dummy-data';
 import { axios } from '../config/axios';
 import { CommissionsFeeService } from './commissions-fee-config-service';
 
@@ -10,17 +10,27 @@ jest.mock('../config/axios');
 
 const mockedAxios = axios as jest.MockedFunction<typeof axios>;
 
-describe('getCashInFee', () => {
+describe('getCashInFee:', () => {
   afterEach(jest.clearAllMocks);
 
-  test('getCashInFee successful', async () => {
+  test('API call is successful', async () => {
     (mockedAxios.get as jest.Mock).mockResolvedValueOnce({
       data: testCashInFee,
     });
     const result = await CommissionsFeeService.getCashInFee();
 
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
-    expect(result).toEqual(testCashInFee);
+    expect(result).toStrictEqual(testCashInFee);
+  });
+
+  test('API call should throw error', async () => {
+    (mockedAxios.get as jest.Mock).mockRejectedValueOnce('NETWORK_ERROR');
+
+    try {
+      await CommissionsFeeService.getCashInFee();
+    } catch (e) {
+      expect(e).toEqual('NETWORK_ERROR');
+    }
   });
 });
 
@@ -37,6 +47,16 @@ describe('getCashOutNaturalFee', () => {
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
     expect(result).toEqual(testCashOutNaturalFee);
   });
+
+  test('API call should throw error', async () => {
+    (mockedAxios.get as jest.Mock).mockRejectedValueOnce('NETWORK_ERROR');
+
+    try {
+      await CommissionsFeeService.getCashOutNaturalFee();
+    } catch (e) {
+      expect(e).toEqual('NETWORK_ERROR');
+    }
+  });
 });
 
 describe('getCashOutJuridicalFee', () => {
@@ -49,5 +69,15 @@ describe('getCashOutJuridicalFee', () => {
 
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
     expect(result).toEqual(testCashOutJuridicalFee);
+  });
+
+  test('API call should throw error', async () => {
+    (mockedAxios.get as jest.Mock).mockRejectedValueOnce('NETWORK_ERROR');
+
+    try {
+      await CommissionsFeeService.getCashOutNaturalFee();
+    } catch (e) {
+      expect(e).toEqual('NETWORK_ERROR');
+    }
   });
 });
