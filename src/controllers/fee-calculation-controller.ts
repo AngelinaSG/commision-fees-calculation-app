@@ -27,7 +27,7 @@ export const processCalculation = async (pathToFile: string) => {
       'Fee calculation have finished successfully:)',
     );
   } catch (error) {
-    return OutputHelper.gradient('passion', (error as Error).message);
+    return OutputHelper.error((error as Error).message);
   }
 };
 
