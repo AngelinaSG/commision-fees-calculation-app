@@ -4,6 +4,8 @@ import * as console from "console";
 interface OutputHelperInterface {
   simple: (data: any) => void;
   gradient: (gradientType: 'passion' | 'teen', data: string) => void;
+
+  error: (data: string) => void;
 }
 
 class _OutputHelper implements OutputHelperInterface {
