@@ -19,8 +19,8 @@ class _CommissionsFeeService implements CommissionsFeeServiceInterface {
   }
 
   getCashInFee = async (): Promise<ICashInFee> => {
-    const res = await this.https.get('tasks/api/cash-in');
-    return res.data;
+    const result = await this.https.get('tasks/api/cash-in');
+    return result.data;
   };
 
   getCashOutNaturalFee = async (): Promise<ICashOutNaturalFee> => {

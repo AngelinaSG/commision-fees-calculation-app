@@ -28,8 +28,8 @@ describe('getCashInFee:', () => {
 
     try {
       await CommissionsFeeService.getCashInFee();
-    } catch (e) {
-      expect(e).toEqual('NETWORK_ERROR');
+    } catch (error) {
+      expect(error).toEqual('NETWORK_ERROR');
     }
   });
 });
@@ -53,8 +53,8 @@ describe('getCashOutNaturalFee', () => {
 
     try {
       await CommissionsFeeService.getCashOutNaturalFee();
-    } catch (e) {
-      expect(e).toEqual('NETWORK_ERROR');
+    } catch (error) {
+      expect(error).toEqual('NETWORK_ERROR');
     }
   });
 });
@@ -76,8 +76,8 @@ describe('getCashOutJuridicalFee', () => {
 
     try {
       await CommissionsFeeService.getCashOutNaturalFee();
-    } catch (e) {
-      expect(e).toEqual('NETWORK_ERROR');
+    } catch (error) {
+      expect(error).toEqual('NETWORK_ERROR');
     }
   });
 });

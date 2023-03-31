@@ -31,8 +31,8 @@ export const calculateCashOutNatural = ({
   }
 
   const freeFeeLimitUsageAmount = cashOutNaturalHistory[user_id].reduce(
-    (prev, cur) => {
-      return prev + cur.operation.amount;
+    (previousValue, currentValue) => {
+      return previousValue + currentValue.operation.amount;
     },
     0,
   );

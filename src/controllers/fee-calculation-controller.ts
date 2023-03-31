@@ -26,11 +26,11 @@ export const processCalculation = async (pathToFile: string) => {
       'teen',
       'Fee calculation have finished successfully:)',
     );
-  } catch (e) {
-    return OutputHelper.gradient('passion', (e as Error).message);
+  } catch (error) {
+    return OutputHelper.gradient('passion', (error as Error).message);
   }
 };
 
 const outputData = (data: string[]) => {
-  data.forEach((res) => OutputHelper.simple(`${res}\n`));
+  data.forEach((value) => OutputHelper.simple(`${value}\n`));
 };
