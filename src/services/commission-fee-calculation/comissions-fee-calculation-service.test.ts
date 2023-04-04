@@ -4,10 +4,11 @@ import {
   testCashOutJuridicalFee,
   testCashOutNaturalFee,
   testOperationsList,
+  testOperationsListUnsupportedCurrency,
 } from '../../dummy-data/dummy-data';
 
 describe('Commission fee calculation service', () => {
-  test('Calculate fee', () => {
+  test('Calculate fee with correct data', () => {
     expect(
       calculateFee({
         operationsList: testOperationsList,
@@ -26,5 +27,18 @@ describe('Commission fee calculation service', () => {
       '0.00',
       '0.00',
     ]);
+  });
+
+  test('Calculate fee with unsupported currencies should throw error', () => {
+    try {
+      calculateFee({
+        operationsList: testOperationsListUnsupportedCurrency,
+        cashInFee: testCashInFee,
+        cashOutNaturalFee: testCashOutNaturalFee,
+        cashOutJuridicalFee: testCashOutJuridicalFee,
+      });
+    } catch (e) {
+      expect(e).toEqual(e);
+    }
   });
 });

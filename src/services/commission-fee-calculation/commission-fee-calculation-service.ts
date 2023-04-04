@@ -1,5 +1,9 @@
 import { DateHelper } from '../../utils/date-helper';
-import { OPERATION_TYPE, USER_TYPE } from '../../constants/constants';
+import {
+  OPERATION_TYPE,
+  SUPPORTED_CURRENCIES,
+  USER_TYPE,
+} from '../../constants/constants';
 import { NumberHelper } from '../../utils/number-helper';
 import {
   ICashInFee,
@@ -32,8 +36,12 @@ export const calculateFee = ({
       user_id,
       user_type,
       type,
-      operation: { amount },
+      operation: { amount, currency },
     } = operation;
+
+    if (!SUPPORTED_CURRENCIES.includes(currency)) {
+      throw new Error(`ERROR: ${currency} is not supported currency`);
+    }
 
     let operationFee;
 
