@@ -1,5 +1,4 @@
 import gradient from 'gradient-string';
-import * as console from "console";
 
 interface OutputHelperInterface {
   simple: (data: any) => void;
@@ -24,8 +23,8 @@ class _OutputHelper implements OutputHelperInterface {
   };
 
   error = (data) => {
-    console.error(this.outputPlugin.passion(data))
-  }
+    console.error(this.outputPlugin.passion(data));
+  };
 }
 
 export const OutputHelper = new _OutputHelper(gradient);

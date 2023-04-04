@@ -1,10 +1,13 @@
-import fs from 'fs';
+import fs from 'fs/promises';
+import { getValidJSON } from '../get-valid-json';
 
-export function parseFile<T>(pathToFile: string) {
-  return new Promise<T>((resolve, reject) => {
-    fs.readFile(pathToFile, (error, data) => {
-      if (error) return reject(error);
-      return resolve(JSON.parse(Buffer.from(data).toString()));
-    });
-  });
+export async function parseFile<T>(pathToFile: string): Promise<T> {
+  const data = await fs.readFile(pathToFile);
+
+  const validJSON = await getValidJSON(data.toString());
+
+  if (!validJSON)
+    throw new Error('ERROR: input file is empty or data is invalid');
+
+  return validJSON;
 }
