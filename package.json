@@ -7,7 +7,7 @@
     "start:dev": "npx nodemon src/input.json",
     "test": "jest",
     "lint:fix": "eslint --fix . && prettier --write .",
-    "build": "tsc"
+    "build": "npm run lint:fix && babel src --out-dir dist --extensions .ts,.tsx --source-maps inline --copy-files"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,13 @@
     "process": "^0.11.10"
   },
   "devDependencies": {
+    "babel-jest": "^29.5.0",
+    "babel-node": "^0.0.1-security",
+    "babel-plugin-inline-dotenv": "^1.7.0",
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-typescript": "^7.21.4",
     "@tsconfig/node-lts-strictest-esm": "^18.12.1",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.5",
